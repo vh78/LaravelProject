@@ -10,7 +10,6 @@
  <body>
   <div class="container">    
      <br />
-     <h3 align="center">Laravel 5.8 Crud Tutorial</h3>
      <br />
      @yield('main')
     </div>

@@ -29,11 +29,11 @@ Route::delete('/resourceName/{resource}',   'ControllerName@destroy');
 
 */
 
-Route::get('/', 'HomeController@index')->middleware(App\Http\Middleware\NewMiddleware::class);
-/*Route::get('/', function () {
-    return redirect('crud');
-});*/
-Route::resource('crud','CrudsController');
+Route::get('/', 'HomeController@index');
+//Route::get('/device', 'DeviceController@index');
+//Route::get('/sensor', 'SensorController@index');
+//Route::get('/sensor/{id}', 'SensorController@show');
+//Route::resource('crud','CrudsController');
 Auth::routes();
 
 Auth::routes();

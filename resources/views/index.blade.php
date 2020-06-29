@@ -19,7 +19,7 @@
    <td>{{ $row -> id}}</td>
    <td>{{ $row->first_name }}</td>
    <td>{{ $row->last_name }}</td>
-   <td><a href="{{ route('crud.edit', $crud->id) }}" >Edit</a></td>
+
    <td>
     
    </td>
