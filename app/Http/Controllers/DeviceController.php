@@ -14,8 +14,8 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        $data = Device::latest()->paginate(1);
-        return view('device', compact('data'))
+        $data = Device::latest()->paginate(3);
+        return view('device/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 1);
     }
 
@@ -26,7 +26,7 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        return view('create-device');
+        return view('device/create');
     }
 
     /**
@@ -60,7 +60,7 @@ class DeviceController extends Controller
     public function show($id)
     {
         $data = Device::findOrFail($id);
-        return view('view-device', compact('data'));
+        return view('device/view', compact('data'));
     }
 
 
@@ -73,7 +73,7 @@ class DeviceController extends Controller
     public function edit($id)
     {
         $data = Device::findOrFail($id);
-        return view('edit-device', compact('data'));
+        return view('device/edit', compact('data'));
     }
 
     /**
@@ -85,9 +85,23 @@ class DeviceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'name'    =>  'required',
+            'params'     =>  'required'
+        ]);
     
+
+    $form_data = array(
+        'name'       =>   $request->name,
+        'params'        =>   $request->params
+    );
+
+    Device::whereId($id)->update($form_data);
+
+    return redirect('device')->with('success', 'Data is successfully updated');
     }
+    
+    
 
     /**
      * Remove the specified resource from storage.

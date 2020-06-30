@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Middle;
 
-use App\Sensor;
-class SensorController extends Controller
+class MiddleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,9 @@ class SensorController extends Controller
      */
     public function index()
     {
-        $data = Sensor::latest()->paginate(3);
-       return view('sensore/index', compact('data'))
+        $data = Middle::latest()->paginate(3);
+        return view('device_sensors/index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 1);
-
-                //return view('index');
     }
 
     /**
@@ -28,7 +26,7 @@ class SensorController extends Controller
      */
     public function create()
     {
-        return view('sensore/create');
+        return view('device_sensors/create');
     }
 
     /**
@@ -40,17 +38,18 @@ class SensorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'    =>  'required',
-            'params'     =>  'required'
+            'sens_id'    =>  'required',
+            'dev_id'     =>  'required'
          
         ]);
         $form_data = array(
-            'name'       =>   $request->name,
-            'params'        =>   $request->params
+            'sens_id'       =>   $request->sens_id,
+            'dev_id'        =>   $request->dev_id
         );
-        Sensor::create($form_data);
+       
+        Middle::create($form_data);
 
-        return redirect('sensore')->with('success', 'Data Added successfully.');
+        return redirect('middle')->with('success', 'Data Added successfully.');
     }
 
     /**
@@ -61,10 +60,8 @@ class SensorController extends Controller
      */
     public function show($id)
     {
-        $data = Sensor::findOrFail($id);
-        return view('sensore/show', compact('data'));
+        //
     }
-    
 
     /**
      * Show the form for editing the specified resource.
@@ -74,8 +71,7 @@ class SensorController extends Controller
      */
     public function edit($id)
     {
-        $data = Sensor::findOrFail($id);
-        return view('sensore/edit', compact('data'));
+        //
     }
 
     /**
@@ -87,20 +83,7 @@ class SensorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'    =>  'required',
-            'params'     =>  'required'
-        ]);
-    
-
-    $form_data = array(
-        'name'       =>   $request->name,
-        'params'        =>   $request->params
-    );
-
-    Sensor::whereId($id)->update($form_data);
-
-    return redirect('sensore')->with('success', 'Data is successfully updated');
+        //
     }
 
     /**

@@ -37,4 +37,7 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Auth::routes();
-
+Route::resource('sensore', 'SensorController');
+Route::resource('device', 'DeviceController');
+Route::resource('middle', 'MiddleController');
+//Route::get('/sensore', 'SensorController@index');
